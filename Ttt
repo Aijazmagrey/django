@@ -1,0 +1,161 @@
+import React from 'react';
+
+// --- STYLES ---
+const styles = {
+  container: {
+    position: 'relative',
+    display: 'inline-block',
+    width: '100%',
+    maxWidth: '800px', 
+    fontFamily: 'Arial, sans-serif',
+    overflow: 'hidden',
+    borderRadius: '8px', 
+  },
+  image: {
+    display: 'block',
+    width: '100%',
+    height: 'auto',
+  },
+  overlay: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: 'rgba(0, 0, 0, 0.7)', 
+    color: '#ffffff',
+    padding: '20px',
+    boxSizing: 'border-box',
+  },
+  logoBadge: {
+    position: 'absolute',
+    right: '0',
+    top: '-55px', 
+    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+    padding: '8px 16px',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '10px',
+    borderTopLeftRadius: '8px',
+  },
+  logoIcon: {
+    fontSize: '24px',
+    color: '#4A90E2', 
+  },
+  logoText: {
+    lineHeight: '1.2',
+  },
+  locationHeader: {
+    textAlign: 'center',
+    fontSize: '18px',
+    marginBottom: '16px',
+  },
+  dataGrid: {
+    display: 'grid',
+    gridTemplateColumns: '1fr 1fr',
+    gap: '20px',
+  },
+  column: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '12px',
+  },
+  dataBlock: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '4px',
+  },
+  label: {
+    fontSize: '15px',
+    color: '#eaeaea',
+  },
+  value: {
+    fontSize: '16px',
+    fontWeight: 'bold',
+  }
+};
+
+// --- GPS OVERLAY COMPONENT ---
+const GpsPhotoOverlay = ({
+  imageUrl = "https://i.ibb.co/XrYkNLWd/Picsart-26-03-19-12-21-26-411.jpg", // Using your image here
+  location = "Bathipora, near, bridge, 192233",
+  latitude = "33.63183452747762°",
+  longitude = "74.88586460240185°",
+  localTime = "10:53:14 AM",
+  gmtTime = "05:23:14 AM",
+  altitude = "1967 meters",
+  date = "Thursday, 19.03.2026"
+}) => {
+  return (
+    <div style={styles.container}>
+      {/* Background Image */}
+      <img src={imageUrl} alt="GPS Stamped" style={styles.image} />
+
+      {/* Bottom Data Overlay */}
+      <div style={styles.overlay}>
+        
+        {/* GPS Map Camera Lite Logo */}
+        <div style={styles.logoBadge}>
+          <div style={styles.logoIcon}>◎</div>
+          <div style={styles.logoText}>
+            <strong>GPS Map</strong>
+            <span style={{ fontSize: '12px', display: 'block' }}>Camera Lite</span>
+          </div>
+        </div>
+
+        {/* Location Header */}
+        <div style={styles.locationHeader}>
+          {location}
+        </div>
+
+        {/* Coordinates and Date Grid */}
+        <div style={styles.dataGrid}>
+          {/* Left Column */}
+          <div style={styles.column}>
+            <div style={styles.dataBlock}>
+              <span style={styles.label}>Latitude</span>
+              <span style={styles.value}>{latitude}</span>
+            </div>
+            <div style={styles.dataBlock}>
+              <span style={styles.label}>Local {localTime}</span>
+              <span style={styles.label}>GMT {gmtTime}</span>
+            </div>
+          </div>
+
+          {/* Right Column */}
+          <div style={styles.column}>
+            <div style={styles.dataBlock}>
+              <span style={styles.label}>Longitude</span>
+              <span style={styles.value}>{longitude}</span>
+            </div>
+            <div style={styles.dataBlock}>
+              <span style={styles.label}>Altitude {altitude}</span>
+              <span style={styles.label}>{date}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// --- MAIN APP COMPONENT ---
+export default function App() {
+  return (
+    <div style={{ padding: '20px', backgroundColor: '#f0f0f0', minHeight: '100vh' }}>
+      <h2 style={{ fontFamily: 'Arial' }}>Editable GPS Photo</h2>
+      
+      {/* You can edit any of these text properties right here.
+        If you leave a property out, it will use the default from the component above.
+      */}
+      <GpsPhotoOverlay 
+        imageUrl="https://i.ibb.co/XrYkNLWd/Picsart-26-03-19-12-21-26-411.jpg"
+        location="Srinagar, Jammu and Kashmir, India"
+        date="Thursday, 10.03.2026"
+        localTime="12:45:03 PM"
+        latitude="34.0837° N"
+        longitude="74.7973° E"
+        altitude="1585 meters"
+      />
+    </div>
+  );
+}
